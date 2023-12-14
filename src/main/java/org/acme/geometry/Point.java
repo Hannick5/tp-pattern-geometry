@@ -3,11 +3,11 @@ package org.acme.geometry;
 public class Point implements Geometry{
 	private Coordinate coordinate;
 	
-	Point(){
+	public Point(){
 		this.coordinate = new Coordinate();
 	}
 	
-	Point(Coordinate coordinate){
+	public Point(Coordinate coordinate){
 		this.coordinate = coordinate;
 	}
 	
