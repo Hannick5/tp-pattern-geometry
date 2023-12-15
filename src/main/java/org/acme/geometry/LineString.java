@@ -3,7 +3,7 @@ package org.acme.geometry;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LineString implements Geometry {
+public class LineString extends AbstractGeometry {
 
 	private List<Point> points;
 
@@ -53,19 +53,6 @@ public class LineString implements Geometry {
 		}
 		LineString l = new LineString(tablPoint);
 		return l;
-	}
-
-	@Override
-	public Envelope getEnvelope() {
-		EnvelopeBuilder builder = new EnvelopeBuilder();
-
-		for (Point p : this.points) {
-			builder.insert(p.getCoordinate());
-		}
-
-		Envelope result = builder.build();
-
-		return result;
 	}
 	
 	@Override

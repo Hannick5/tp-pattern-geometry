@@ -1,9 +1,6 @@
 package org.acme.geometry;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
-
-public class Point implements Geometry {
+public class Point extends AbstractGeometry {
 	private Coordinate coordinate;
 
 	public Point() {
@@ -44,15 +41,10 @@ public class Point implements Geometry {
 		Point p = new Point(this.getCoordinate());
 		return p;
 	}
-
-	@Override
-	public Envelope getEnvelope() {
-		Envelope e = new Envelope(this.getCoordinate(), this.getCoordinate());
-		return e;
-	}
 	
 	@Override
 	public void accept(GeometryVisitor visitor) {
 		visitor.visit(this);
 	}
+
 }
