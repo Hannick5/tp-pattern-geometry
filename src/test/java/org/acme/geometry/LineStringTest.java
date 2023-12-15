@@ -1,6 +1,8 @@
 package org.acme.geometry;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,6 +32,12 @@ public class LineStringTest {
 		assertEquals(l.getNumPoints(), 0);
 		assertEquals(l.getType(), l2.getType(), "LineString");
 
+	}
+	
+	@Test
+	public void LineStringNull(){
+		LineString l = new LineString(null);
+		assertTrue(l.isEmpty());
 	}
 
 }

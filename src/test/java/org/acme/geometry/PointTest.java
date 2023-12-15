@@ -22,4 +22,11 @@ public class PointTest {
 		assertEquals(p.getType(), "Point");
 	}
 	
+	@Test
+	public void PointNull(){
+		Point p = new Point(null);
+		assertTrue(p.isEmpty());
+	}
+
+	
 }

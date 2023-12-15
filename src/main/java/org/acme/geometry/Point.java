@@ -8,7 +8,13 @@ public class Point implements Geometry{
 	}
 	
 	public Point(Coordinate coordinate){
-		this.coordinate = coordinate;
+		if(coordinate != null) {
+			this.coordinate = coordinate;
+		}
+		else {
+			this.coordinate = new Coordinate();
+		}
+		
 	}
 	
 	public Coordinate getCoordinate(){
@@ -18,6 +24,11 @@ public class Point implements Geometry{
 	@Override
 	public String getType() {
 		return "Point";
+	}
+	
+	@Override
+	public boolean isEmpty() {
+		return this.coordinate.isEmpty();
 	}
 	
 }
