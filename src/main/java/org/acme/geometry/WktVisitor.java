@@ -23,4 +23,14 @@ public class WktVisitor implements GeometryVisitor {
     public String getResult() {
         return builder.toString();
     }
+    
+    @Override
+    public void visit(GeometryCollection geometryCollection) {
+        builder.append("GEOMETRYCOLLECTION(");
+        for (Geometry geometry : geometryCollection.getGeometries()) {
+            geometry.accept(this);
+            builder.append(",");
+        }
+        builder.deleteCharAt(builder.length() - 1).append(")");
+    }
 }

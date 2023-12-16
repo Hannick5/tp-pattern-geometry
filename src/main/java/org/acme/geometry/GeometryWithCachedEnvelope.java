@@ -25,6 +25,11 @@ public class GeometryWithCachedEnvelope implements Geometry, GeometryListener {
 		this.original.translate(dx, dy);
 
 	}
+	
+	@Override
+    public Geometry clone() {
+        return new GeometryWithCachedEnvelope(this.original.clone());
+    }
 
 	@Override
 	public Envelope getEnvelope() {

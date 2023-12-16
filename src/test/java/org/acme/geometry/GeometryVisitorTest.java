@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -69,6 +70,33 @@ public class GeometryVisitorTest {
 		String result4 = os4.toString("UTF8");
 		
 		assertEquals(result4, "Je suis une polyligne vide.");
+		///////////////////////////////////////////////////////////////////////
+
+		GeometryCollection geometryCollection = new GeometryCollection(Arrays.asList(
+		new Point(new Coordinate(1.0, 2.0)),
+		new Point(new Coordinate(3.0, 4.0))));
 		
+		ByteArrayOutputStream os5 = new ByteArrayOutputStream();
+		PrintStream out5 = new PrintStream(os5);
+		
+		LogGeometryVisitor visitor5 = new LogGeometryVisitor(out5);
+		geometryCollection.accept(visitor5);
+		String result5 = os5.toString("UTF8");
+		
+		assertEquals(result5, "Je suis une collection de 2 géométries.");
+		
+		///////////////////////////////////////////////////////////////////////
+		
+		GeometryCollection emptyGeometryCollection = new GeometryCollection(new ArrayList<>());
+		
+		ByteArrayOutputStream os6 = new ByteArrayOutputStream();
+		PrintStream out6 = new PrintStream(os6);
+		
+		LogGeometryVisitor visitor6 = new LogGeometryVisitor(out6);
+		emptyGeometryCollection.accept(visitor6);
+		String result6 = os6.toString("UTF8");
+		
+		assertEquals(result6, "Je suis une collection vide de géométries.");
+
 	}
 }

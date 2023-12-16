@@ -28,4 +28,10 @@ public class EnvelopeBuilder implements GeometryVisitor{
 			this.insert(lineString.getPointN(i).getCoordinate());
 		}		
 	}
+	
+	public void visit(GeometryCollection geometryCollection) {
+	    for (Geometry geometry : geometryCollection.getGeometries()) {
+	        geometry.accept(this);
+	    }
+	}
 }

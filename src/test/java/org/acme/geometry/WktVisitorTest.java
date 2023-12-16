@@ -32,4 +32,17 @@ public class WktVisitorTest {
 		l.accept(visitor);
 		assertEquals( "LINESTRING(3.0 4.0,2.0 5.0,6.0 9.0)", visitor.getResult() );
 	}
+	
+	@Test
+    public void testGeometryCollectionWKT() {
+        Point point = new Point(new Coordinate(1.0, 2.0));
+        LineString line = new LineString(Arrays.asList(new Point(new Coordinate(3.0, 4.0)),
+                                                       new Point(new Coordinate(5.0, 6.0))));
+        GeometryCollection geometryCollection = new GeometryCollection(Arrays.asList(point, line));
+
+        WktVisitor wktVisitor = new WktVisitor();
+        geometryCollection.accept(wktVisitor);
+        
+        assertEquals("GEOMETRYCOLLECTION(POINT(1.0 2.0),LINESTRING(3.0 4.0,5.0 6.0))", wktVisitor.getResult());
+    }
 }

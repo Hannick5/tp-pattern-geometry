@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -71,5 +72,19 @@ public class GeometryWithCachedEnvelopeTest {
         assertEquals(geo.getType(), "LineString");
         assertFalse(geo.isEmpty());
         
+	}
+	
+	@Test
+	public void testClone() {
+		
+	    Point point = new Point(new Coordinate(2.0, 3.0));
+	    List<Point> points = new ArrayList<>();
+	    points.add(point);
+	    LineString originalLine = new LineString(points);
+	    GeometryWithCachedEnvelope originalGeometry = new GeometryWithCachedEnvelope(originalLine);
+
+	    GeometryWithCachedEnvelope clonedGeometry = (GeometryWithCachedEnvelope) originalGeometry.clone();
+
+	    assertNotSame(originalGeometry, clonedGeometry);
 	}
 }
