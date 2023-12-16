@@ -1,51 +1,52 @@
 package org.acme.geometry;
 
-public class GeometryWithCachedEnvelope implements Geometry, GeometryListener{
+public class GeometryWithCachedEnvelope implements Geometry, GeometryListener {
 	private Geometry original;
 	private Envelope cachedEnvelope;
-	
+
 	public GeometryWithCachedEnvelope(Geometry original) {
 		this.original = original;
+		cachedEnvelope = original.getEnvelope();
+		original.addListener(this);
 	}
 
 	@Override
 	public String getType() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.original.getType();
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.original.isEmpty();
 	}
 
 	@Override
 	public void translate(double dx, double dy) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@Override
-	public Envelope getEnvelope() {
-	    if (cachedEnvelope == null) {
-	        cachedEnvelope = original.getEnvelope();
-	    }
-	    return cachedEnvelope;
+		this.original.translate(dx, dy);
+
 	}
 
+	@Override
+	public Envelope getEnvelope() {
+		return this.cachedEnvelope;
+	}
 
 	@Override
 	public void accept(GeometryVisitor visitor) {
-		// TODO Auto-generated method stub
-		
+		this.original.accept(visitor);
+
 	}
 
 	@Override
 	public void onChange(Geometry geometry) {
-		// TODO Auto-generated method stub
-	
+		this.original = geometry;
+		this.cachedEnvelope = geometry.getEnvelope();
+
 	}
-	
-		
+
+	@Override
+	public void addListener(GeometryListener listener) {
+
+	}
+
 }
