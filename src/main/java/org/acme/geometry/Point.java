@@ -42,9 +42,9 @@ public class Point extends AbstractGeometry {
 		Point p = new Point(this.getCoordinate());
 		return p;
 	}
-	
+
 	@Override
-	public void accept(GeometryVisitor visitor) {
+	public void accept(GeometryVisitor<Void> visitor) {
 		visitor.visit(this);
 	}
 

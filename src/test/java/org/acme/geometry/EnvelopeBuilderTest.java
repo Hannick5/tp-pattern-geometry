@@ -5,9 +5,9 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 public class EnvelopeBuilderTest {
-	
+
 	public static final double EPSILON = 1.0e-15;
-	
+
 	@Test
 	public void testBuild() {
 		EnvelopeBuilder builder = new EnvelopeBuilder();

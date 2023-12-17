@@ -55,10 +55,24 @@ public class LineString extends AbstractGeometry {
 		LineString l = new LineString(tablPoint);
 		return l;
 	}
-	
+
 	@Override
-	public void accept(GeometryVisitor visitor) {
+	public void accept(GeometryVisitor<Void> visitor) {
 		visitor.visit(this);
+	}
+
+	public double getLength() {
+		double length = 0.0;
+		for (int i = 1; i < points.size(); i++) {
+			length += distanceBetween(points.get(i - 1), points.get(i));
+		}
+		return length;
+	}
+
+	private double distanceBetween(Point p1, Point p2) {
+		double dx = p2.getCoordinate().getX() - p1.getCoordinate().getX();
+		double dy = p2.getCoordinate().getY() - p1.getCoordinate().getY();
+		return Math.sqrt(dx * dx + dy * dy);
 	}
 
 }
